@@ -1,0 +1,31 @@
+# script to create case folder structure automatically
+
+import os
+import time
+import sys
+from os import path
+
+def case_creation():
+    case_reference = input('Enter case reference: ')
+    case_folders = ['ANALYSIS', 'CASE FILES', 'DOCUMENTS', 'EVIDENTIAL',
+                    'IMAGES', 'NON-EVIDENTIAL', 'PHONES', 'PHOTOGRAPHS']    
+    try:
+        os.chdir('G:')
+        os.mkdir(case_reference)
+        os.chdir('G:' + case_reference)
+        for folders in case_folders:
+            os.makedirs(folders)
+        print('Successfully created case folders... Exiting...')
+        time.sleep(1.5)
+    except:
+        if path.exists(case_reference):
+            print('This case reference already exists... please enter another: ')
+            case_creation()
+        elif case_reference == '':
+            print('You must enter a case reference, try again... ')
+            case_creation()
+        else:
+            print('Unexpected error, fix the script David you twat... Exiting...')
+        time.sleep(1.5)
+        sys.exit(1)
+case_creation()
